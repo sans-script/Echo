@@ -102,6 +102,7 @@ For example:
 
 ```text
 workspace/
+├── README.md
 ├── resume_example.txt
 ├── test-echo.txt
 └── test-location.txt
@@ -332,6 +333,18 @@ http://localhost:11434
 ```
 
 ---
+
+## Tests
+
+```bash
+pip install -r requirements.txt -r requirements-dev.txt
+python -m pytest
+```
+
+The suite (run on every push by GitHub Actions) covers the two layers that stand between the model and the host:
+
+* `tests/test_filesystem_sandbox.py`: path traversal, absolute paths, symlinks that point outside, system directories, and the read/write behavior inside the workspace.
+* `tests/test_tool_registry.py`: unknown tools, malformed JSON, missing and undeclared parameters, type coercion of model-generated values, error handling and output truncation.
 
 ## Usage
 
