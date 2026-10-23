@@ -211,7 +211,7 @@ Each entry contains:
 {
   "text": "user input",
   "timestamp": "2026-09-23T20:32:29.894085+00:00",
-  "workspace": "C:\\Users\\Sans\\echo\\workspace"
+  "workspace": "/home/you/echo/workspace"
 }
 ```
 
@@ -282,7 +282,7 @@ The configuration currently stores settings such as:
 ```json
 {
   "model": "qwen2.5:3b-instruct",
-  "workspace": "C:\\Users\\Sans\\echo\\workspace"
+  "workspace": "/home/you/echo/workspace"
 }
 ```
 
