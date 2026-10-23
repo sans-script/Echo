@@ -439,25 +439,14 @@ The important architectural detail is that the model does not directly write the
 
 ## Testing
 
-Run the unit tests:
+The current automated test suite uses **pytest**. Install the development dependencies and run the tests with:
 
 ```bash
-python -m unittest tests/test_tools_unit.py
+pip install -r requirements.txt -r requirements-dev.txt
+python -m pytest
 ```
 
-Run live end-to-end integration tests:
-
-```bash
-python -m unittest tests/test_live_experiment.py
-```
-
-The live tests require Ollama and the configured local model.
-
-Run the complete test suite:
-
-```bash
-python -m unittest discover tests -v
-```
+The current suite covers filesystem sandboxing and tool-registry validation. Live end-to-end experiments are not listed here as an available test command; check the files under `tests/` for the tests that currently exist.
 
 ---
 
@@ -475,8 +464,8 @@ echo/
 │       ├── filesystem.py
 │       └── ...
 ├── tests/
-│   ├── test_tools_unit.py
-│   └── test_live_experiment.py
+│   ├── test_filesystem_sandbox.py
+│   └── test_tool_registry.py
 ├── workspace/
 ├── run_echo.py
 ├── requirements.txt
