@@ -1,0 +1,50 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    name: Build and Publish Windows Release
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out tagged source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      - name: Validate semantic version tag
+        shell: pwsh
+        run: |
+          $tag = $env:GITHUB_REF_NAME
+          if ($tag -notmatch '^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$') {
+            throw "Expected a stable semantic version tag such as v1.2.3; received '$tag'."
+          }
+
+      - name: Build and package Echo
+        shell: pwsh
+        run: ./build.ps1
+
+      - name: Name package with version
+        shell: pwsh
+        run: Copy-Item dist/Echo-portable.zip "dist/Echo-$($env:GITHUB_REF_NAME)-portable.zip"
+
+      - name: Create package checksum
+        shell: pwsh
+        run: |
+          $package = "dist/Echo-$($env:GITHUB_REF_NAME)-portable.zip"
+          $hash = (Get-FileHash $package -Algorithm SHA256).Hash.ToLowerInvariant()
+          Set-Content "$package.sha256" "$hash  $(Split-Path $package -Leaf)" -NoNewline
+
+      - name: Publish GitHub release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create $env:GITHUB_REF_NAME "dist/Echo-$($env:GITHUB_REF_NAME)-portable.zip" "dist/Echo-$($env:GITHUB_REF_NAME)-portable.zip.sha256" --title "Echo $($env:GITHUB_REF_NAME)" --generate-notes
