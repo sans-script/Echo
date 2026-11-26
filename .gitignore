@@ -14,3 +14,15 @@ chat/
 AUDIT.md
 fakeproc.sh
 *.log
+
+# Local credentials and secrets
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+auth.json
+.credentials.json
+credentials.json
+antigravity-oauth-token

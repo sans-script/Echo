@@ -1,0 +1,37 @@
+name: Feature Request
+description: Suggest an improvement to Echo.
+title: "Feature: "
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Do not include account credentials, private transcripts, or real account screenshots.
+        For security vulnerabilities, use [private vulnerability reporting](https://github.com/sans-script/Echo/security/advisories/new), not a public issue.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What workflow or limitation should this address?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed Change
+      description: Describe the behavior you would like to see.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+    validations:
+      required: false
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy Check
+      options:
+        - label: I have not included credentials, private transcripts, or real account screenshots.
+          required: true
