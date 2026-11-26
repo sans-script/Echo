@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for helping keep Echo useful, predictable and slightly less spreadsheet-shaped. Contributions should improve the local monitoring and coordination workflow without obscuring where provider data comes from or what a send action will do.
+Thanks for helping keep Echo useful, predictable, and slightly less buggy — and slightly less spreadsheet-shaped. Contributions should improve the local monitoring and coordination workflow without obscuring where provider data comes from or what a send action will do.
 
 ## Before You Start
 
