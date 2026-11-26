@@ -33,11 +33,7 @@ $exe = Join-Path $src 'Echo.exe'
 if ($LASTEXITCODE) { throw "csc failed ($LASTEXITCODE)" }
 
 # Install (stop the running copy first so files are not locked).
-Get-Process Echo, AgentMonitor -ErrorAction SilentlyContinue | Stop-Process -Force
-# The old install (AgentMonitor) goes; Echo moves its data folder on first start.
-$old = Join-Path $env:LOCALAPPDATA 'Programs\AgentMonitor'
-if (Test-Path $old) { Start-Sleep -Milliseconds 500; Remove-Item $old -Recurse -Force }
-Remove-Item (Join-Path $src 'AgentMonitor.exe') -ErrorAction SilentlyContinue
+Get-Process Echo -ErrorAction SilentlyContinue | Stop-Process -Force
 Start-Sleep -Milliseconds 500
 New-Item -ItemType Directory -Force $out | Out-Null
 Copy-Item $exe, "$src\lib\*.dll" $out -Force
@@ -53,8 +49,7 @@ Compress-Archive -Path "$out\*" -DestinationPath $zip -Force
 Write-Host "Portable zip: $zip"
 Write-Host "Installed to $out"
 
-# Start Menu shortcut, named after the app (Echo); the old "Agent Monitor" one is replaced.
+# Start Menu shortcut, named after the app (Echo).
 $menu = Join-Path $env:APPDATA 'Microsoft\Windows\Start Menu\Programs'
-Remove-Item (Join-Path $menu 'Agent Monitor.lnk') -ErrorAction SilentlyContinue
 $lnk = (New-Object -ComObject WScript.Shell).CreateShortcut((Join-Path $menu 'Echo.lnk'))
 $lnk.TargetPath = Join-Path $out 'Echo.exe'; $lnk.WorkingDirectory = $out; $lnk.Save()
