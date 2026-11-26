@@ -1,0 +1,218 @@
+/* Geist foundations + the components this app uses.
+   Token values were read from vercel.com/geist (CSS custom properties, light :root and .dark-theme).
+   The official React components (@vercel/geistcn) are private, so components below are
+   re-implementations that follow the published specs. */
+
+@font-face { font-family: "Geist"; src: url(fonts/Geist-Variable.woff2) format("woff2"); font-weight: 100 900; font-display: block; }
+@font-face { font-family: "Geist Mono"; src: url(fonts/GeistMono-Variable.woff2) format("woff2"); font-weight: 100 900; font-display: block; }
+
+/* ---------- Light (default :root) ---------- */
+:root {
+  --gray-100: hsl(0,0%,95%);  --gray-200: hsl(0,0%,92%);  --gray-300: hsl(0,0%,90%);  --gray-400: hsl(0,0%,92%);
+  --gray-500: hsl(0,0%,79%);  --gray-600: hsl(0,0%,66%);  --gray-700: hsl(0,0%,56%);  --gray-800: hsl(0,0%,49%);
+  --gray-900: hsl(0,0%,30%);  --gray-1000: hsl(0,0%,9%);
+  --gray-alpha-100: #0000000d; --gray-alpha-200: #00000014; --gray-alpha-300: #0000001a; --gray-alpha-400: #00000014;
+  --gray-alpha-500: #00000036; --gray-alpha-600: #00000057;
+  --bg-100: hsl(0,0%,100%); --bg-200: hsl(0,0%,98%);
+
+  --blue-100: hsl(212,100%,97%); --blue-200: hsl(210,100%,96%); --blue-300: hsl(210,100%,94%);
+  --blue-700: hsl(214,100%,52%); --blue-900: hsl(214,100%,45%); --blue-1000: hsl(211,100%,15%);
+  --green-100: hsl(120,60%,96%); --green-200: hsl(120,60%,95%); --green-300: hsl(120,60%,91%);
+  --green-700: hsl(142,71%,40%); --green-900: hsl(142,76%,29%); --green-1000: hsl(128,29%,15%);
+  --amber-100: hsl(39,100%,95%); --amber-200: hsl(44,100%,92%); --amber-300: hsl(43,96%,90%);
+  --amber-700: hsl(38,100%,52%); --amber-900: hsl(28,100%,38%); --amber-1000: hsl(20,79%,17%);
+  --red-100: hsl(0,100%,97%);    --red-200: hsl(0,100%,96%);    --red-300: hsl(0,100%,95%);
+  --red-700: hsl(355,88%,56%);   --red-900: hsl(356,80%,46%);   --red-1000: hsl(355,49%,15%);
+  --purple-200: hsl(277,87%,97%); --purple-700: hsl(268,85%,60%); --purple-900: hsl(270,80%,48%);
+  --teal-200: hsl(167,70%,94%);   --teal-700: hsl(173,80%,36%);   --teal-900: hsl(174,91%,25%);
+
+  --shadow-border: 0 0 0 1px #00000014;
+  --shadow-small: 0 0 0 1px #00000014, 0px 2px 2px #0000000a;
+  --shadow-modal: 0 0 0 1px #00000014, 0px 1px 1px #00000005, 0px 8px 16px -4px #0000000a, 0px 24px 32px -8px #0000000f;
+  --focus-ring: 0 0 0 2px var(--bg-100), 0 0 0 4px var(--blue-700);
+  --overlay: hsla(0,0%,95%,.8);
+  color-scheme: light;
+}
+
+/* ---------- Dark ---------- */
+.dark-theme {
+  --gray-100: hsl(0,0%,10%);  --gray-200: hsl(0,0%,12%);  --gray-300: hsl(0,0%,16%);  --gray-400: hsl(0,0%,18%);
+  --gray-500: hsl(0,0%,27%);  --gray-600: hsl(0,0%,53%);  --gray-700: hsl(0,0%,56%);  --gray-800: hsl(0,0%,49%);
+  --gray-900: hsl(0,0%,63%);  --gray-1000: hsl(0,0%,93%);
+  --gray-alpha-100: #ffffff0f; --gray-alpha-200: #ffffff17; --gray-alpha-300: #ffffff21; --gray-alpha-400: #ffffff24;
+  --gray-alpha-500: #ffffff3d; --gray-alpha-600: #ffffff82;
+  --bg-100: hsl(0,0%,4%); --bg-200: hsl(0,0%,0%);
+
+  --blue-100: hsl(216,70%,13%); --blue-200: hsl(214,75%,17%); --blue-300: hsl(213,80%,23%);
+  --blue-700: hsl(214,100%,56%); --blue-900: hsl(212,100%,72%); --blue-1000: hsl(206,100%,96%);
+  --green-100: hsl(142,65%,9%);  --green-200: hsl(142,65%,12%); --green-300: hsl(142,65%,16%);
+  --green-700: hsl(142,76%,46%); --green-900: hsl(142,80%,58%); --green-1000: hsl(136,73%,94%);
+  --amber-100: hsl(35,100%,9%);  --amber-200: hsl(32,100%,12%); --amber-300: hsl(33,100%,17%);
+  --amber-700: hsl(40,100%,55%); --amber-900: hsl(42,100%,60%);  --amber-1000: hsl(40,94%,93%);
+  --red-100: hsl(357,60%,13%);   --red-200: hsl(357,65%,17%);   --red-300: hsl(356,70%,24%);
+  --red-700: hsl(356,92%,60%);   --red-900: hsl(358,100%,71%);  --red-1000: hsl(353,90%,96%);
+  --purple-200: hsl(281,55%,17%); --purple-700: hsl(268,90%,64%); --purple-900: hsl(272,100%,78%);
+  --teal-200: hsl(170,80%,10%);   --teal-700: hsl(172,90%,40%);   --teal-900: hsl(172,95%,50%);
+
+  --shadow-border: 0 0 0 1px #ffffff25;
+  --shadow-small: 0 0 0 1px #ffffff25, 0px 1px 2px #00000029;
+  --shadow-modal: 0 0 0 1px #ffffff24, 0px 1px 1px #00000005, 0px 8px 16px -4px #0000000a, 0px 24px 32px -8px #0000000f;
+  --overlay: hsla(0,0%,0%,.8);
+  color-scheme: dark;
+}
+
+/* ---------- Base ---------- */
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  background: var(--bg-200); color: var(--gray-1000);
+  font-family: "Geist", "Segoe UI", sans-serif; font-size: 14px; line-height: 20px;
+  -webkit-font-smoothing: antialiased; font-feature-settings: "liga" 1, "calt" 1;
+}
+::selection { background: var(--gray-1000); color: var(--gray-100); }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--gray-alpha-400); border-radius: 10px; border: 2px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: var(--gray-alpha-500); background-clip: padding-box; border: 2px solid transparent; }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* ---------- Typography (Geist type scale) ---------- */
+.heading-24 { font-size: 24px; line-height: 32px; letter-spacing: -0.96px; font-weight: 600; }
+.heading-20 { font-size: 20px; line-height: 26px; letter-spacing: -0.4px; font-weight: 600; }
+.heading-16 { font-size: 16px; line-height: 24px; letter-spacing: -0.32px; font-weight: 600; }
+.heading-14 { font-size: 14px; line-height: 20px; letter-spacing: -0.28px; font-weight: 600; }
+.label-16 { font-size: 16px; line-height: 20px; font-weight: 400; }
+.label-14 { font-size: 14px; line-height: 20px; font-weight: 400; }
+.label-13 { font-size: 13px; line-height: 16px; font-weight: 400; }
+.label-12 { font-size: 12px; line-height: 16px; font-weight: 400; }
+.label-14 strong, .label-13 strong, .label-16 strong, .label-12 strong, .strong { font-weight: 500; }
+.mono { font-family: "Geist Mono", ui-monospace, monospace; }
+.label-13-mono { font-family: "Geist Mono", monospace; font-size: 13px; line-height: 20px; }
+.label-12-mono { font-family: "Geist Mono", monospace; font-size: 12px; line-height: 16px; }
+.copy-13 { font-size: 13px; line-height: 18px; }
+.copy-14 { font-size: 14px; line-height: 20px; }
+.tabular { font-variant-numeric: tabular-nums; }
+.caps { text-transform: uppercase; letter-spacing: .04em; }
+.secondary { color: var(--gray-900); }
+.ellipsis { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+
+/* ---------- Materials ---------- */
+.material-base  { background: var(--bg-100); border-radius: var(--radius);  box-shadow: var(--shadow-border); }
+.material-small { background: var(--bg-100); border-radius: var(--radius);  box-shadow: var(--shadow-small); }
+.material-medium{ background: var(--bg-100); border-radius: var(--radius); box-shadow: var(--shadow-small); }
+.material-modal { background: var(--bg-100); border-radius: var(--radius); box-shadow: var(--shadow-modal); }
+
+/* ---------- Badge ---------- */
+.badge {
+  display: inline-flex; align-items: center; gap: 4px; height: 20px; padding: 0 8px; border-radius: 9999px;
+  font-size: 11px; line-height: 20px; font-weight: 500; white-space: nowrap; font-variant-numeric: tabular-nums;
+}
+.badge.md { height: 24px; padding: 0 10px; font-size: 12px; }
+.badge.gray-subtle  { background: var(--gray-200);  color: var(--gray-1000); }
+.badge.green-subtle { background: var(--green-200); color: var(--green-900); }
+.badge.amber-subtle { background: var(--amber-200); color: var(--amber-900); }
+.badge.red-subtle   { background: var(--red-200);   color: var(--red-900); }
+.badge.blue-subtle  { background: var(--blue-200);  color: var(--blue-900); }
+.badge.purple-subtle{ background: var(--purple-200);color: var(--purple-900); }
+.badge.teal-subtle  { background: var(--teal-200);  color: var(--teal-900); }
+.badge .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.badge .dot.pulse { animation: pulse 1.6s ease-in-out infinite; }
+@keyframes pulse { 0%,100% { opacity: 1 } 50% { opacity: .35 } }
+
+/* ---------- Avatar ---------- */
+.avatar {
+  flex: none; display: grid; place-items: center; border-radius: 50%;
+  background: var(--gray-100); box-shadow: 0 0 0 1px var(--gray-alpha-400);
+  color: var(--gray-1000); font-weight: 500; font-size: 12px; letter-spacing: .02em;
+}
+
+/* ---------- Button ---------- */
+.button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 32px; padding: 0 10px;
+  border: 0; border-radius: var(--radius); cursor: pointer; font-size: 14px; font-weight: 500; white-space: nowrap;
+  background: var(--bg-100); color: var(--gray-1000); box-shadow: var(--shadow-border);
+  transition: background .15s ease, box-shadow .15s ease;
+}
+.button:hover { background: var(--gray-alpha-100); }
+.button.tertiary { box-shadow: none; background: transparent; }
+.button.tertiary:hover { background: var(--gray-alpha-200); }
+.button.icon { width: 32px; padding: 0; }
+.button.sm { height: 28px; font-size: 13px; }
+.button.sm.icon { width: 28px; }
+
+/* ---------- Switch (segmented control) ---------- */
+.switch { display: inline-flex; padding: 3px; gap: 2px; border-radius: var(--radius); background: var(--gray-100); box-shadow: 0 0 0 1px var(--gray-alpha-400); }
+.switch button {
+  border: 0; background: transparent; height: 26px; padding: 0 12px; border-radius: calc(var(--radius) - 3px); cursor: pointer;
+  color: var(--gray-900); font-size: 13px; font-weight: 500; display: inline-flex; align-items: center; gap: 6px;
+  transition: color .15s ease, background .15s ease;
+}
+.switch button:hover { color: var(--gray-1000); }
+.switch button[aria-checked="true"] { background: var(--bg-100); color: var(--gray-1000); box-shadow: var(--shadow-small); }
+.switch.icons button { width: 28px; padding: 0; justify-content: center; }
+
+/* ---------- Tabs ---------- */
+.tabs { display: flex; gap: 20px; box-shadow: inset 0 -1px 0 var(--gray-alpha-400); }
+.tabs button {
+  border: 0; background: none; padding: 0 0 12px; cursor: pointer; font-size: 14px; color: var(--gray-900);
+  box-shadow: inset 0 -2px 0 transparent; transition: color .15s ease;
+}
+.tabs button:hover { color: var(--gray-1000); }
+.tabs button[aria-selected="true"] { color: var(--gray-1000); box-shadow: inset 0 -2px 0 var(--gray-1000); }
+
+/* ---------- Gauge (circular, Geist geometry: r=42.5, stroke 15 on a 100 box) ---------- */
+.gauge { flex: none; display: block; }
+.gauge circle { fill: none; stroke-width: 15; stroke-linecap: round; transition: stroke-dasharray .5s ease, stroke .5s ease; }
+.gauge .track { stroke: var(--gray-alpha-400); }
+
+/* ---------- Progress ---------- */
+.progress { height: 6px; border-radius: 6px; background: var(--gray-alpha-400); overflow: hidden; }
+.progress > i { display: block; height: 100%; border-radius: 6px; background: var(--gray-1000); transition: width .5s ease, background .5s ease; }
+
+/* ---------- Note ---------- */
+.note {
+  display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; border-radius: var(--radius); font-size: 14px; line-height: 20px;
+  box-shadow: 0 0 0 1px var(--gray-alpha-400); background: var(--bg-100);
+}
+.note svg { flex: none; margin-top: 2px; }
+.note.warning { background: var(--amber-100); box-shadow: 0 0 0 1px var(--amber-300); color: var(--amber-900); }
+.note.error   { background: var(--red-100);   box-shadow: 0 0 0 1px var(--red-300);   color: var(--red-900); }
+.note.success { background: var(--green-100); box-shadow: 0 0 0 1px var(--green-300); color: var(--green-900); }
+
+/* ---------- Skeleton ---------- */
+.skeleton {
+  border-radius: 6px; background: linear-gradient(270deg, var(--gray-100), var(--gray-200), var(--gray-200), var(--gray-100));
+  background-size: 400% 100%; animation: skeleton 8s ease-in-out infinite;
+}
+@keyframes skeleton { 0% { background-position: 200% 0 } 100% { background-position: -200% 0 } }
+
+/* ---------- Loading dots ---------- */
+.loading-dots { display: inline-flex; gap: 3px; align-items: center; }
+.loading-dots i { width: 4px; height: 4px; border-radius: 50%; background: currentColor; animation: ld 1.4s infinite both; }
+.loading-dots i:nth-child(2) { animation-delay: .2s } .loading-dots i:nth-child(3) { animation-delay: .4s }
+@keyframes ld { 0%,80%,100% { opacity: .2 } 40% { opacity: 1 } }
+
+/* ---------- Tooltip ---------- */
+[data-tip] { position: relative; }
+/* Keep tooltips inside the window: open downward in the top bar, align right near the right edge. */
+.topbar [data-tip]:hover::after { top: calc(100% + 8px); bottom: auto; }
+#theme [data-tip]:hover::after { left: auto; right: 0; transform: none; }
+/* A button whose menu is open already shows what its tip would say. */
+[aria-expanded="true"][data-tip]:hover::after { display: none; }
+/* Inside the scrolling drawer body: open to the left of the button, which always has room. */
+.copyable [data-tip]:hover::after { left: auto; bottom: auto; right: calc(100% + 8px); top: 50%; transform: translateY(-50%); }
+[data-tip]:hover::after {
+  content: attr(data-tip); position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translateX(-50%);
+  background: var(--gray-1000); color: var(--bg-100); font-size: 12px; line-height: 16px; font-weight: 400;
+  padding: 6px 8px; border-radius: var(--radius); pointer-events: none; z-index: 10; box-shadow: var(--shadow-small);
+  /* short tips stay on one line; long ones (paths) wrap at a readable width instead of running off the window */
+  width: max-content; max-width: min(320px, calc(100vw - 32px)); white-space: normal; overflow-wrap: anywhere;
+}
+
+/* ---------- Description list ---------- */
+.description dt { font-size: 12px; line-height: 16px; color: var(--gray-900); margin: 0 0 2px; }
+.description dd { margin: 0; font-size: 14px; line-height: 20px; color: var(--gray-1000); }
+
+/* ---------- Separator ---------- */
+.separator { height: 1px; background: var(--gray-alpha-400); border: 0; margin: 0; }

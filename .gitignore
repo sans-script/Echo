@@ -1,0 +1,16 @@
+# Builds
+Echo.exe
+app.ico
+dist/
+__pycache__/
+*.pyc
+
+# Generated demo site (rebuilt by docs/demo/shoot.ps1)
+docs/demo/site/
+
+# Personal: your agent list, group chats and local notes
+agents.json
+chat/
+AUDIT.md
+fakeproc.sh
+*.log

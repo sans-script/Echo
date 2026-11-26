@@ -1,0 +1,10 @@
+﻿Third-party assets
+
+Geist Sans / Geist Mono fonts - Copyright (c) 2023 Vercel, in collaboration with basement.studio.
+SIL Open Font License 1.1 (see fonts/LICENSE.TXT).
+
+icons/codex.svg, icons/antigravity.svg - from @lobehub/icons-static-svg (MIT),
+as redistributed by Codenotch (https://github.com/vinzdg/codenotch, MIT).
+Product names and marks belong to their respective owners.
+
+Visual design follows the Vercel Geist design system guidelines (https://vercel.com/geist).
